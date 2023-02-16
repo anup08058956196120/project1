@@ -62,7 +62,7 @@ def register(request):
         Examportal.objects.create(name=name,password=password,mobno=mobno)
     except:
         return render(request,'register.html',{'message':'user already present',"name":name,"password":password,"mobno":mobno,"email":email})
-    return render(request,'login.html',{'message':'registration sucessfull.'})
+    return render(request,'login.html',{'message':'Registration sucessfull.'})
 
  
 def login(request):
