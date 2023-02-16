@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+    <style>
+
+      body{
+        background-size: 100% 600px ;
+       background-color: black;
+       color: white;
+        background-repeat: no-repeat;
+    }
+
+#form{
+  border: 3px solid black;
+  text-align:center;
+  box-sizing: border-box;
+  width: 600px;
+  height: 400px;
+  margin: auto; 
+  padding-top: 30px;
+  border-radius: 20px;
+  background-color: grey;
+  color: black;
+}
+
+#btn
+{
+  border-radius: 5px;
+ 
+}
+
+      td
+      {
+        padding: 15px 0;
+      }
+      input{
+        padding: 4px;
+        border-radius: 10px;
+
+      }
+    
+      #a
+      {
+        display:none;
+      }
+      </style>
+
+      <script>
+        var xmlhttp
+        function storeans()
+        {
+          var qno=document.QuestionsForm.qno.value
+          var qtext=document.QuestionsForm.qtext.value
+          var qanswer=document.QuestionsForm.qanswer.value
+          var op=document.QuestionsForm.op.value
+           <!-- alert(qno+qtext+qanswer+op)  -->
+           var data="?qno="+qno+"&qtext="+qtext+"&qanswer="+qanswer+"&op="+op
+       xmlhttp=new XMLHttpRequest()
+       xmlhttp.open('get','/demoapp/storeans'+data)
+       xmlhttp.send()
+        }
+  
+      function displayTime()
+      {
+        sessionStorage.setItem("timeleft",parseInt(sessionStorage.getItem("timeleft"))-1)
+        var leftime=parseInt(sessionStorage.getItem("timeleft"))
+        var min=Math.floor(leftime/60).toString().padStart(2,'0')
+        var sec=((leftime-min*60)).toString().padStart(2,'0')
+        document.getElementById("timeleft").innerHTML=min +":" +sec 
+       
+        if(leftime==0)
+        {
+          alert("Time Up !")
+          window.location.href="/demoapp/answerschecking"
+        }
+      }
+      setInterval(displayTime,1000)
+  
+      function check()
+      {
+        if(sessionStorage.getItem("timeleft")==null)
+        {
+          window.location.href="/demoapp/ "
+        }
+      }
+  
+      function changecolor()
+      {
+        var allans=document.getElementsByName("span")
+        var allradio=document.getElementsByName("op")
+        var previous=document.QuestionsForm.previous.value
+  for(var i=0;i<allans.length;i++)
+  {
+  if(allans[i].innerText==previous)
+  {
+    allradio[i].checked=true
+    allans[i].style.color="red"
+    break 
+  }
+  }
+    }
+  
+    addEventListener("load",check)
+    addEventListener("load",changecolor)
+  
+      </script>
+</head>
+
+<body >
+Remaining Time :<span id="timeleft"></span> <br>
+Total questions :<span id="">{{Totalquestions}}</span><br>
+Remaining questions :<span id="">{{Remainingquestions}}</span><br>
+Attempted questions :<span id="">{{Attemptedquestions}}</span> <br>
+
+ <div id="form">
+    <form name="QuestionsForm">
+        
+      <input name="subject" type="text" value="{{question.subject}}"><br><br>
+
+     <input name="qno" type="text" value="{{question.qno}}" ><br><br>
+
+        <input name="qtext" type="text" id="q" value="{{question.qtext}}" size="70">
+
+        <input name="qanswer" type="text" id="a" value="{{question.qanswer}}"><br><br>
+
+        <input type="radio" name="op" id="op1" value="{{question.op1}}" onclick="storeans()">
+
+        <span id="o1" name="span"> {{question.op1}} </span><br>
+
+        <input type="radio" name="op" id="op2" value="{{question.op2}}" onclick="storeans()">
+
+        <span name="span" id="o2">{{question.op2}}</span><br><br>
+
+        <input type="hidden" name="previous" value="{{previous}}" id="">
+        
+
+        <button type="submit" id="btn" name="next" formaction="/demoapp/previous">Previous</button>
+
+        <button id="btn" type="submit" name="next" formaction="/demoapp/next">Next</button>
+        <br><br>
+
+        <input type="submit" value="End Exam" formaction="/demoapp/answerschecking">
+
+    <span style="color:red;font-size:large">{{errormessage}}</span>
+    </form>
+
+  </div>
+    </body> 
+</html>

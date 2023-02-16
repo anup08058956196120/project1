@@ -1,0 +1,280 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>     
+
+        {% load static %}
+        <script>
+            sessionStorage.setItem("timeleft",10061);
+        </script>
+
+<style>
+body{
+    
+    background: url("https://static.vecteezy.com/system/resources/previews/001/180/492/original/online-examination-process-landing-page-vector.jpg");
+    background-size: 100% 600px ;
+        
+        background-repeat: no-repeat;
+}
+
+    #form{
+        box-sizing: border-box;
+        border: 3px solid black;
+        text-align: center;
+        width: 350px;
+        height: 300px;
+        margin: auto;
+        border-radius: 20px;
+        padding: 20px;
+        padding-top: 40px;
+        background-color: rgba(96, 206, 105, 0.5);
+   
+    
+       
+    }
+
+ input[type="text"]
+   {
+  border-radius: 5px;
+  padding: 5px;
+   }
+    
+ input[type="submit"]
+{
+ border-radius: 10%;
+ color: white;
+ background-color: black;
+}
+
+select
+{
+    padding: 5px;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+}
+
+#msg{
+    margin: auto;
+    font-size: 30px;
+    text-align: center;
+    color: red;
+}
+</style>
+</head>
+
+<body>
+<div id="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Online Exam Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/demoapp/adminpage/">Admin page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav> 
+
+</div>
+
+<div id="msg">
+    {{message}}
+    {{res}}  <span style="color:red">{{msg}}</span>
+    <br>
+    
+    {{request.GET.name}}    
+    {{request.GET.password}}
+</div>
+<div id="form">
+    <form action="/demoapp/login" method="GET">
+         
+        <input name="uname" type="text" placeholder="Enter user name" value="{{request.GET.name}}"><br><br>
+        <input name="upass" type="text" placeholder="Enter password" value="{{request.GET.password}}"><br><br>
+        <select name="subject">
+            <option value="gk">gk</option>
+            <option value="apti">maths</option>
+        </select>
+     <br><br>
+        <input type="submit" value="Login"> 
+        <input type="submit" value="Sign Up" formaction="/demoapp/register"> 
+
+        <!-- <a href="/demoapp/register">Sign Up</a>  -->
+    </form>
+</div>  
+{{result}}
+
+<br>
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+   
+    <!-- Section: Social media -->
+
+    <!-- Section: Form -->
+    <section class="">
+      <form action="">
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+          <!--Grid column-->
+          <div class="col-auto">
+            <p class="pt-2">
+              <strong>Sign up for our newsletter</strong>
+            </p>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-md-5 col-12">
+            <!-- Email input -->
+            <div class="form-outline form-white mb-4">
+              <input type="email" id="form5Example21" class="form-control" />
+              <label class="form-label" for="form5Example21">Email address</label>
+            </div>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-auto">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-outline-light mb-4">
+              Subscribe
+            </button>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </form>
+    </section>
+    <!-- Section: Form -->
+
+    <!-- Section: Text -->
+    <section class="mb-4">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+        repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+        eum harum corrupti dicta, aliquam sequi voluptate quas.
+      </p>
+    </section>
+    <!-- Section: Text -->
+
+    <!-- Section: Links -->
+    <section class="">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Get to Know Us</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">About Us</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Careers</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Press Releases</a>
+            </li>
+           
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Connect with Us</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">Facebook</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Twitter</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Instagram</a>
+            </li>
+            
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Mail Us</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">xyz1234@gmail.com</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">abc1234@gmail.com</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">pqr1234@gmail.com</a>
+            </li>
+            
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">policy</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">Privacy</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Security</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Terms of use</a>
+            </li>
+      
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-white" href="https://mdbootstrap.com/">apnascholl.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+    </body>
+
+
+</html>

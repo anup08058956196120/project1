@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
+
+     <style>
+        body{
+            background: url("https://static.vecteezy.com/system/resources/previews/001/180/492/original/online-examination-process-landing-page-vector.jpg");
+            background-size: 100% 600px ;
+            background-repeat: no-repeat;
+            
+        }
+
+        span
+        {
+            color:red;
+        }
+    
+        #nav
+        {
+            padding-bottom: 10px;
+        }
+
+        #div2
+            {
+                text-align:center;
+                border:3px solid black;
+                width:400px;
+                margin:auto;
+               padding-top: 10px;
+                background-color: rgba(96, 206, 105, 0.5);
+
+                padding-bottom:20px;
+                box-sizing:border-box;
+                border-radius: 50px;
+            }
+            input
+            {
+                padding:10px;
+                border-radius: 10px;
+            }
+            
+            input[type="submit"]
+            {
+                padding:15px 20px;
+                color:white;
+                background-color:black;
+                border-radius:50%;
+            }
+    
+    
+    </style>
+
+    <script>
+        var xmlhttp
+       function check()
+        {
+            var name=document.registerForm.name.value
+            var data="name="+name
+            xmlhttp=new XMLHttpRequest()
+            xmlhttp.onload=displayData
+            xmlhttp.open("get","/demoapp/checkUsername?"+data)
+            xmlhttp.send()
+        } 
+
+        function displayData() 
+        {
+            var data=xmlhttp.responseText
+            var obj=JSON.parse(data)
+            //parse will convert json data into js object
+            document.getElementById("show").innerHTML=obj.message 
+        }
+
+        function change()
+        {
+       
+            this.style.color="white";
+            this.style.background="black";
+        }
+     
+
+
+         function load()
+             { 
+
+                  var inputelements= document.getElementsByTagName("input");
+
+                   for (let index = 0; index < inputelements.length-1; index++) 
+                 {
+
+	                inputelements[index].addEventListener("focus",change);
+ 	
+                 }
+
+            }
+</script>
+
+</head>
+<body onload="load()">
+
+    <div id="nav">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Online Exam Portal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav> 
+    
+    </div>
+
+    <div id="div2">
+        <form action="/demoapp/savedata" method="GET" name="registerForm" >
+            <span id="show">checking</span> <br>
+            <input type="text" value="{{name}}"  name="name"  placeholder="Enter username" onblur="check()" id=""> <br><br>
+            <input type="text" value="{{password}}" name="password"  placeholder="Enter password" id=""> <br><br>
+            <input type="text" value="{{mobno}}" name="mobno"  placeholder="Enter Mobile number" id=""> <br><br>
+            <input type="text" name="email"  value="{{email}}" placeholder="Enter Email" id=""> <br><br>
+           <input type="submit" name="" id="" value="Register">
+        </form>
+    </div>
+    <br>
+    <footer class="bg-dark text-center text-white">
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!-- Section: Social media -->
+       
+        <!-- Section: Social media -->
+    
+        <!-- Section: Form -->
+        <section class="">
+          <form action="">
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center">
+              <!--Grid column-->
+              <div class="col-auto">
+                <p class="pt-2">
+                  <strong>Sign up for our newsletter</strong>
+                </p>
+              </div>
+              <!--Grid column-->
+    
+              <!--Grid column-->
+              <div class="col-md-5 col-12">
+                <!-- Email input -->
+                <div class="form-outline form-white mb-4">
+                  <input type="email" id="form5Example21" class="form-control" />
+                  <label class="form-label" for="form5Example21">Email address</label>
+                </div>
+              </div>
+              <!--Grid column-->
+    
+              <!--Grid column-->
+              <div class="col-auto">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-outline-light mb-4">
+                  Subscribe
+                </button>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+          </form>
+        </section>
+        <!-- Section: Form -->
+    
+        <!-- Section: Text -->
+        <section class="mb-4">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+            repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+            eum harum corrupti dicta, aliquam sequi voluptate quas.
+          </p>
+        </section>
+        <!-- Section: Text -->
+    
+        <!-- Section: Links -->
+        <section class="">
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">Get to Know Us</h5>
+    
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a href="#!" class="text-white">About Us</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">Careers</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">Press Releases</a>
+                </li>
+               
+              </ul>
+            </div>
+            <!--Grid column-->
+    
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">Connect with Us</h5>
+    
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a href="#!" class="text-white">Facebook</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">Twitter</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">Instagram</a>
+                </li>
+                
+              </ul>
+            </div>
+            <!--Grid column-->
+    
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">Mail Us</h5>
+    
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a href="#!" class="text-white">xyz1234@gmail.com</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">abc1234@gmail.com</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">pqr1234@gmail.com</a>
+                </li>
+                
+              </ul>
+            </div>
+            <!--Grid column-->
+    
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">policy</h5>
+    
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a href="#!" class="text-white">Privacy</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">Security</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-white">Terms of use</a>
+                </li>
+          
+              </ul>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+      </div>
+      <!-- Grid container -->
+    
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">apnascholl.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+</body>
+</html>
